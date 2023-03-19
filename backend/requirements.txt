@@ -11,6 +11,7 @@ defusedxml==0.7.1
 distro==1.8.0
 Django==3.2.18
 django-cors-headers==3.14.0
+django-filter==22.1
 django-templated-mail==1.1.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==4.8.0
@@ -19,9 +20,11 @@ docker==6.0.1
 docker-compose==1.29.2
 dockerpty==0.4.1
 docopt==0.6.2
+drf-extra-fields==3.4.1
 flake8==5.0.4
 gunicorn==20.1.0
 idna==3.4
+isort==5.12.0
 itypes==1.2.0
 Jinja2==3.1.2
 jsonschema==3.2.0
@@ -31,6 +34,7 @@ oauthlib==3.2.2
 packaging==23.0
 paramiko==3.0.0
 Pillow==9.4.0
+psycopg2-binary==2.9.5
 pycodestyle==2.9.1
 pycparser==2.21
 pyflakes==2.5.0

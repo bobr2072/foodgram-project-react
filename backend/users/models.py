@@ -1,33 +1,53 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
-class Subcribe(models.Model):
-    user_following = models.ForeignKey(
+class User(AbstractUser):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [
+        'username',
+        'first_name',
+        'last_name',
+    ]
+    email = models.EmailField(
+        'email address',
+        max_length=254,
+        unique=True,
+    )
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+    def __str__(self):
+        return self.username
+
+
+class Subscribe(models.Model):
+    subscriber = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name='follower',
+        related_name='subscriber',
         verbose_name='Подписывающийся юзер',
     )
-    author_followed = models.ForeignKey(
+    author_sub = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name='following',
+        related_name='author_sub',
         verbose_name='Автор, на которого подписываются',
     )
 
     class Meta:
         verbose_name = 'Подписки на авторов'
-        unique_together = ['user_following', 'author_followed']
+        unique_together = ['subscriber', 'author_sub']
         constraints = [
-            models.CheckConstraint(
-                check=~models.Q(user_following=models.F('author_followed')),
-                name='no_self_follows'
+            models.UniqueConstraint(
+                fields=['subscriber', 'author_sub'],
+                name='unique_subscription'
             )
         ]
