@@ -6,9 +6,9 @@ from .models import Cart, Favorite, Ingredient, Recipe, RecipeIngredient, Tag
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_filter = ['author', 'name', 'tags']
-    filter_horizontal = ['ingredients', 'tags']
+    filter_horizontal = ('ingredients', 'tags')
     ordering = ('id',)
-    list_display = ['name', 'author']
+    list_display = ('name', 'author')
 
 
 @admin.register(Tag)
