@@ -43,7 +43,7 @@ class CustomUserSerializer(UserSerializer):
         if user.is_anonymous:
             return False
         return Subscribe.objects.filter(
-            subscriber=user, author_sub=obj
+            user=user, author=obj
         ).exists()
 
 
@@ -61,7 +61,7 @@ class SubscribeSerializer(CustomUserSerializer):
         author = self.instance
         user = self.context.get('request').user
         if Subscribe.objects.filter(
-            author_sub=author, subscriber=user
+            author=author, user=user
         ).exists():
             raise ValidationError(
                 detail='Вы уже подписаны на этого пользователя!',
