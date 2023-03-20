@@ -21,9 +21,11 @@ docker-compose==1.29.2
 dockerpty==0.4.1
 docopt==0.6.2
 drf-extra-fields==3.4.1
+exceptiongroup==1.1.1
 flake8==5.0.4
 gunicorn==20.1.0
 idna==3.4
+iniconfig==2.0.0
 isort==5.11.5
 itypes==1.2.0
 Jinja2==3.1.2
@@ -34,6 +36,7 @@ oauthlib==3.2.2
 packaging==23.0
 paramiko==3.0.0
 Pillow==9.4.0
+pluggy==1.0.0
 psycopg2-binary==2.9.5
 pycodestyle==2.9.1
 pycparser==2.21
@@ -41,6 +44,7 @@ pyflakes==2.5.0
 PyJWT==2.6.0
 PyNaCl==1.5.0
 pyrsistent==0.19.3
+pytest==7.2.2
 python-dotenv==0.21.1
 python3-openid==3.2.0
 pytz==2022.7.1
@@ -52,6 +56,7 @@ social-auth-app-django==4.0.0
 social-auth-core==4.3.0
 sqlparse==0.4.3
 texttable==1.6.7
+tomli==2.0.1
 uritemplate==4.1.1
 urllib3==1.26.14
 websocket-client==0.59.0
