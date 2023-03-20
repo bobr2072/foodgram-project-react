@@ -1,22 +1,21 @@
-from rest_framework import viewsets
-from recipes.models import (
-    Recipe, Tag, Ingredient, Cart, Favorite, RecipeIngredient
-    )
-from .serializers import (
-    RecipeSerializer, TagSerializer, IngredientSerializer, RecipePreview,
-    RecipeCreateSerializer
-    )
-from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
 from datetime import datetime
+
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
+
+from recipes.models import (Cart, Favorite, Ingredient, Recipe,
+                            RecipeIngredient, Tag)
+
+from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from .serializers import (IngredientSerializer, RecipeCreateSerializer,
+                          RecipePreview, RecipeSerializer, TagSerializer)
 
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):

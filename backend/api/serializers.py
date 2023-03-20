@@ -1,16 +1,16 @@
-from rest_framework import serializers
-from recipes.models import Recipe, Tag, Ingredient, RecipeIngredient
-from users.models import Subscribe
+from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.db.models import F
+from django.shortcuts import get_object_or_404
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
+from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
-from rest_framework import status
-from rest_framework.fields import SerializerMethodField, IntegerField
-from django.db.models import F
+from rest_framework.fields import IntegerField, SerializerMethodField
 from rest_framework.serializers import PrimaryKeyRelatedField
-from django.db import transaction
-from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
+
+from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
+from users.models import Subscribe
 
 User = get_user_model()
 
