@@ -11,7 +11,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'bobr2072.ddns.net',
+    'localhost',
+    'serverpublicip'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,10 +24,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+    'colorfield',
+
     'api',
     'users',
     'recipes',
@@ -89,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

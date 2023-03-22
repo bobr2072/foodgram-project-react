@@ -32,7 +32,7 @@ class CustomUserViewSet(UserViewSet):
         if request.method == 'POST':
             serializer = SubscribeSerializer(author,
                                              data=request.data,
-                                             context={"request": request})
+                                             context={'request': request})
             serializer.is_valid(raise_exception=True)
             Subscribe.objects.create(user=user, author=author)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class User(AbstractUser):
@@ -16,7 +17,7 @@ class User(AbstractUser):
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ('id',)
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
@@ -44,10 +45,14 @@ class Subscribe(models.Model):
 
     class Meta:
         verbose_name = 'Подписки на авторов'
-        unique_together = ['user', 'author']
+        unique_together = ('user', 'author')
         constraints = [
             models.UniqueConstraint(
-                fields=['user', 'author'],
+                fields=('user', 'author'),
                 name='unique_subscription'
             )
         ]
+
+    def validate_subscription(self):
+        if self.user == self.author:
+            raise ValidationError('User cannot subscribe to themselves.')
