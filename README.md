@@ -1,4 +1,4 @@
-[![API for Foodgram project workflow](https://github.com/bobr2072/yamdb_final/actions/workflows/foodgram_workflow.yml/badge.svg?branch=master)](https://github.com/bobr2072/yamdb_final/actions/workflows/foodgram_workflow.yml)
+[![API for Foodgram project workflow](https://github.com/bobr2072/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg?branch=master)](https://github.com/bobr2072/foodgram-project-react/actions/workflows/foodgram_workflow.yml)
 
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
 [![react-router](./src/react-router.svg)](https://badges.aleen42.com/src/react-router.svg) A badge used for projects using [React Router](https://github.com/remix-run/react-router)
