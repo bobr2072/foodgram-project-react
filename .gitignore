@@ -130,3 +130,8 @@ dmypy.json
 
 # .idea
 .idea
+
+# папки со статикой и медиа
+static/
+recipes/static/
+media/
