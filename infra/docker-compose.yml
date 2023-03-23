@@ -37,6 +37,7 @@ services:
       - ../docs/redoc.html:/usr/share/nginx/html/api/docs/redoc.html
       - static_value:/var/html/static/
       - media_value:/var/html/media/
+      - ../frontend/build:/usr/share/nginx/html/
     depends_on:
       - backend
     restart: always
