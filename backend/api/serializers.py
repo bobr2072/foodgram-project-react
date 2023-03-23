@@ -121,7 +121,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'measurement_unit',
-            amount=F('recipeingredient__amount')
+            F('recipeingredient__amount')
         )
         return ingredients
 
