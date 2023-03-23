@@ -14,7 +14,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'bobr2072.ddns.net',
     'localhost',
-    'serverpublicip'
+    'serverpublicip',
+    '0.0.0.0'
 ]
 
 INSTALLED_APPS = [
