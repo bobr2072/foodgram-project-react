@@ -32,6 +32,7 @@ jobs:
   build_and_push_backend_to_docker_hub:
     name: Push Docker backend image to Docker Hub
     runs-on: ubuntu-latest
+    needs: tests
 
     steps:
       - name: Check out the repo
@@ -51,3 +52,4 @@ jobs:
           context: backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-backend:latest
+      
