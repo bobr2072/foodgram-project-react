@@ -5,7 +5,7 @@ on: [push]
 jobs:
 
   build_and_push_backend_to_docker_hub:
-    name: Push Docker image to Docker Hub
+    name: Push Docker backend image to Docker Hub
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-backend:latest
 
   build_and_push_frontend_to_docker_hub:
-    name: Push Docker image to Docker Hub
+    name: Push Docker frontend image to Docker Hub
     runs-on: ubuntu-latest
 
     steps:
