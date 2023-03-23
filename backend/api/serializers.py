@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from django.db.models import F
 from django.shortcuts import get_object_or_404
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
@@ -117,11 +116,13 @@ class RecipeSerializer(serializers.ModelSerializer):
         ]
 
     def get_ingredients(self, obj):
-        ingredients = obj.ingredients.values(
+        ingredients = obj.ingredients.select_related(
+            'recipeingredient'
+        ).values(
             'id',
             'name',
             'measurement_unit',
-            F('recipeingredient__amount')
+            'recipeingredient__amount'
         )
         return ingredients
 
