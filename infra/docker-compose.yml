@@ -14,30 +14,24 @@ services:
   backend:
     image: borya2072/foodgram-backend:latest
     restart: always
-    ports:
-      - "8000:8000"
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
       - redoc:/app/api/docs/
     env_file:
       - ./.env
-    networks:
-      - foodgram_network
+    depends_on:
+      - db
 
   frontend:
     image: borya2072/foodgram-frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
-    ports:
-      - "80:80"
-    networks:
-      - foodgram_network
+    depends_on:
+      - db
 
   nginx:
-    image: nginx:1.21.3-alpine
-    ports:
-      - "8080:80"
+    image: nginx:1.19.3
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ../docs/redoc.html:/usr/share/nginx/html/api/docs/redoc.html
@@ -46,8 +40,6 @@ services:
     depends_on:
       - backend
     restart: always
-    networks:
-      - foodgram_network
 
 volumes:
   static_value:
