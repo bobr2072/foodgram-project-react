@@ -71,7 +71,7 @@ docker-compose up -d --build
 Подробные примеры запросов и коды ответов приведены в прилагаемой документации в формате ReDoc 
 
 ## Адрес и админка
-Адрес: bobr2072.ddns.net
+Адрес: http://bobr2072.ddns.net
 
 Админка: 
 email: admin@gmail.com
