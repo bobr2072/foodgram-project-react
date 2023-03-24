@@ -70,4 +70,12 @@ docker-compose up -d --build
 ## Примеры API-запросов
 Подробные примеры запросов и коды ответов приведены в прилагаемой документации в формате ReDoc 
 
+## Адрес и админка
+Адрес: bobr2072.ddns.net
+
+Админка: 
+email: admin@gmail.com
+username: admin
+password: admin
+
 [def]: https://react.dev
