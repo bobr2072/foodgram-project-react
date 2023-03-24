@@ -57,15 +57,15 @@ docker-compose up -d --build
 - После успешной сборки выполнить следующие действия (только при первом деплое):
     * провести миграции внутри контейнеров:
     ```bash
-    docker-compose exec web python manage.py migrate
+    docker-compose exec backend python manage.py migrate
     ```
     * собрать статику проекта:
     ```bash
-    docker-compose exec web python manage.py collectstatic --no-input
+    docker-compose exec backend python manage.py collectstatic --no-input
     ```  
     * Создать суперпользователя Django, после запроса от терминала ввести логин и пароль для суперпользователя:
     ```bash
-    docker-compose exec web python manage.py createsuperuser
+    docker-compose exec backend python manage.py createsuperuser
     ```
 ## Примеры API-запросов
 Подробные примеры запросов и коды ответов приведены в прилагаемой документации в формате ReDoc 
