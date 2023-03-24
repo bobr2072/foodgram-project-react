@@ -16,6 +16,7 @@ from recipes.models import (Cart, Favorite, Ingredient, Recipe,
 from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
 from .serializers import (IngredientSerializer, RecipeCreateSerializer,
                           RecipePreview, RecipeSerializer, TagSerializer)
+from .filters import IngredientFilter, RecipeFilter
 
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -23,6 +24,7 @@ class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RecipeSerializer
     permission_classes = (IsAdminOrReadOnly, IsAuthorOrReadOnly)
     filter_backends = (DjangoFilterBackend,)
+    filterset_class = RecipeFilter
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -117,3 +119,4 @@ class IngredientViewSet(viewsets.ModelViewSet):
     serializer_class = IngredientSerializer
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
+    filterset_class = IngredientFilter
