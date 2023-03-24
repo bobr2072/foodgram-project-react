@@ -30,8 +30,10 @@ class Tag(models.Model):
         blank=False
     )
     color = ColorField(
+        'Цветовой HEX-код',
         unique=True,
-        blank=False,
+        max_length=7,
+        blank=False
     )
     slug = models.SlugField(
         unique=True,
@@ -110,8 +112,20 @@ class RecipeIngredient(models.Model):
     )
     amount = models.PositiveSmallIntegerField(
         'Количество',
-        validators=[MinValueValidator(1, message='Минимальное количество 1!')]
+        validators=[MinValueValidator(1, message='Минимальное количество 1!')],
+        default=0
     )
+
+    class Meta:
+        verbose_name = 'Ингридиент'
+        verbose_name_plural = 'Количество ингридиентов'
+        ordering = ('recipe', )
+        constraints = (
+            models.UniqueConstraint(
+                fields=('recipe', 'ingredient'),
+                name='\n%(app_label)s_%(class)s ingredient alredy added\n',
+            ),
+        )
 
     def __str__(self):
         return (
