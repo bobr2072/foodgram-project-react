@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.db.models import F
 from django.shortcuts import get_object_or_404
@@ -10,9 +9,7 @@ from rest_framework.fields import IntegerField, SerializerMethodField
 from rest_framework.serializers import PrimaryKeyRelatedField
 
 from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
-from users.models import Subscribe
-
-User = get_user_model()
+from users.models import Subscribe, User
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
