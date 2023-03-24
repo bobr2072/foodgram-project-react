@@ -13,7 +13,7 @@ from users.models import Subscribe, User
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
-    class Meta:
+    class Meta(UserCreateSerializer.Meta):
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + (
             User.USERNAME_FIELD,
@@ -24,7 +24,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
 class CustomUserSerializer(UserSerializer):
     is_subscribed = SerializerMethodField(read_only=True)
 
-    class Meta:
+    class Meta(UserSerializer.Meta):
         model = User
         fields = (
             'email',
