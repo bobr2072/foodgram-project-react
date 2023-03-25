@@ -17,7 +17,9 @@ services:
       - ./.env
 
   backend:
-    image: borya2072/foodgram-backend:latest
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
     restart: always
     command: >
       bash -c "python manage.py migrate &&
