@@ -175,13 +175,13 @@ class Cart(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='cart',
+        related_name='shopping_cart',
         verbose_name='Владелец корзины',
     )
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,
-        related_name='cart',
+        related_name='shopping_cart',
         verbose_name='Рецепты в списке покупок',
     )
     date_added = models.DateTimeField(
@@ -194,7 +194,7 @@ class Cart(models.Model):
         verbose_name = 'Корзина покупок'
         verbose_name_plural = 'Корзина покупок'
         constraints = [
-            models.UniqueConstraint(fields=['user', 'recipe'],
+            models.UniqueConstraint(fields=('user', 'recipe'),
                                     name='unique_shopping_cart')
         ]
 
