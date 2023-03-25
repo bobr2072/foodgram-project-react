@@ -14,7 +14,7 @@ from recipes.models import (Cart, Favorite, Ingredient, Recipe,
                             RecipeIngredient, Tag)
 
 from .filters import IngredientFilter, RecipeFilter
-from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from .permissions import IsAdminOrReadOnly
 from .serializers import (IngredientSerializer, RecipeCreateSerializer,
                           RecipePreview, RecipeSerializer, TagSerializer)
 
@@ -38,7 +38,7 @@ class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
 
