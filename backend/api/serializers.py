@@ -197,15 +197,19 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             tags_list.append(tag)
         return value
 
-    @transaction.atomic
-    def create_ingredients_amounts(self, ingredients, recipe):
-        RecipeIngredient.objects.bulk_create(
-            [RecipeIngredient(
-                ingredient=Ingredient.objects.get(id=ingredient['id']),
-                recipe=recipe,
-                amount=ingredient['amount']
-            ) for ingredient in ingredients]
+    def add_ingredients_and_tags(self, instance, validated_data):
+        ingredients, tags = (
+            validated_data.pop('ingredients'), validated_data.pop('tags')
         )
+        for ingredient in ingredients:
+            count_of_ingredient, _ = RecipeIngredient.objects.get_or_create(
+                ingredient=get_object_or_404(Ingredient, pk=ingredient['id']),
+                amount=ingredient['amount'],
+            )
+            instance.ingredients.add(count_of_ingredient)
+        for tag in tags:
+            instance.tags.add(tag)
+        return instance
 
     @transaction.atomic
     def create(self, validated_data):
