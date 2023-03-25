@@ -13,10 +13,10 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from recipes.models import (Cart, Favorite, Ingredient, Recipe,
                             RecipeIngredient, Tag)
 
+from .filters import IngredientFilter, RecipeFilter
 from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
 from .serializers import (IngredientSerializer, RecipeCreateSerializer,
                           RecipePreview, RecipeSerializer, TagSerializer)
-from .filters import IngredientFilter, RecipeFilter
 
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
