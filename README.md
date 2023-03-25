@@ -15,15 +15,7 @@
 Boris Korenblyas
 
 ### Инструкции для развертывания и запуска приложения
-для Linux-систем все команды необходимо выполнять от имени администратора
-- Склонировать репозиторий
-- Выполнить вход на удаленный сервер
-- Установить docker на сервер:
-- Установить docker-compose на сервер:
-- Локально отредактировать файл infra/nginx.conf, обязательно в строке server_name вписать IP-адрес сервера
-- Скопировать файлы docker-compose.yml и nginx.conf из директории infra на сервер:
-- Создать .env файл по предлагаемому выше шаблону. Обязательно изменить значения POSTGRES_USER и POSTGRES_PASSWORD
-- Для работы с Workflow добавить в Secrets GitHub переменные окружения для работы:
+ - .env file
     ```
     DB_ENGINE=<django.db.backends.postgresql>
     DB_NAME=<имя базы данных postgres>
@@ -45,28 +37,23 @@ Boris Korenblyas
     TELEGRAM_TO=<ID чата, в который придет сообщение>
     TELEGRAM_TOKEN=<токен вашего бота>
     ```
-    Workflow состоит из четырёх шагов:
-     - Проверка кода на соответствие PEP8
-     - Сборка и публикация образа бекенда на DockerHub.
-     - Автоматический деплой на удаленный сервер.
-     - Отправка уведомления в телеграм-чат.
-- собрать и запустить контейнеры на сервере:
-```bash
-docker-compose up -d --build
+
+- Создать и запустить контейнеры Docker, выполнить команду на сервере
+*(версии команд "docker compose" или "docker-compose" отличаются в зависимости от установленной версии Docker Compose):*
 ```
-- После успешной сборки выполнить следующие действия (только при первом деплое):
-    * провести миграции внутри контейнеров:
-    ```bash
-    docker-compose exec web python manage.py migrate
-    ```
-    * собрать статику проекта:
-    ```bash
-    docker-compose exec web python manage.py collectstatic --no-input
-    ```  
-    * Создать суперпользователя Django, после запроса от терминала ввести логин и пароль для суперпользователя:
-    ```bash
-    docker-compose exec web python manage.py createsuperuser
-    ```
+sudo docker-compose up -d --build
+```
+
+- Создать суперпользователя:
+```
+sudo docker-compose exec backend python manage.py createsuperuser
+```
+
+- Наполнить базу данных содержимым из файла ingredients.json:
+```
+sudo docker-compose exec backend python manage.py loaddata ingredients.json
+```
+
 ## Примеры API-запросов
 Подробные примеры запросов и коды ответов приведены в прилагаемой документации в формате ReDoc 
 
