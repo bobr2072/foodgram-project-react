@@ -75,3 +75,44 @@ jobs:
           context: backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-frontend:latest
+
+  deploy:
+    name: Deploying on remote server
+    runs-on: ubuntu-latest
+    needs:
+      - tests
+      - build_and_push_backend_to_docker_hub
+      - build_and_push_frontend_to_docker_hub
+    steps:
+    - name: executing remote ssh commands to deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+          sudo docker pull borya2072/foodgram-backend:latest
+          sudo docker pull borya2072/foodgram-foodgram:latest
+          sudo docker-compose stop
+          sudo docker-compose rm web
+          touch .env
+          echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+          sudo docker-compose up -d --build
+
+  send_message:
+    name: Sending Telegram message
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Send message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ github.workflow }} успешно выполнен!
