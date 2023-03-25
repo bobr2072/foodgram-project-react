@@ -135,7 +135,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class RecipeIngredientSerializer(serializers.ModelSerializer):
-    id = IntegerField()
+    id = IntegerField(write_only=True)
 
     class Meta:
         model = RecipeIngredient
@@ -210,11 +210,11 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def create(self, validated_data):
         tags = validated_data.pop('tags')
-        ingredients_data = validated_data.pop('ingredients')
+        ingredients = validated_data.pop('ingredients')
         recipe = Recipe.objects.create(**validated_data)
         recipe.tags.set(tags)
-        for ingredient_data in ingredients_data:
-            RecipeIngredient.objects.create(recipe=recipe, **ingredient_data)
+        self.create_ingredients_amounts(recipe=recipe,
+                                        ingredients=ingredients)
         return recipe
 
     @transaction.atomic

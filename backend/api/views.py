@@ -110,7 +110,6 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = (IsAdminOrReadOnly,)
-    filter_backends = (DjangoFilterBackend,)
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
