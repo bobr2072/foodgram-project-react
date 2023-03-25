@@ -93,7 +93,7 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           sudo docker pull borya2072/foodgram-backend:latest
-          sudo docker pull borya2072/foodgram-foodgram:latest
+          sudo docker pull borya2072/foodgram-fronend:latest
           sudo docker-compose stop
           sudo docker-compose rm web
           touch .env
