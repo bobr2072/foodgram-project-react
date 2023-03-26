@@ -14,6 +14,19 @@
 
 Boris Korenblyas
 
+### Project
+
+"Foodgram" is another project in my portfolio completed during my studies at @practicum-russia.
+"Foodgram" is a website where you can publish your own recipes, add other users’ recipes to your favorites, subscribe to authors, and create a shopping list for the meals you choose to make.
+Here's what I did during my work on the project:
+configured interaction of a Python application with third-party API services
+created a custom API service based on the Django project
+created a Telegram bot
+connected SPA to the back end on Django via API
+created Docker images and launched containers
+created multi-container applications, deployed and launched on the server
+Tools and stack: #python #JSON #YAML #Django #React #Telegram #API #Docker #Nginx #PostgreSQL #Gunicorn #JWT #Postman
+
 ### Инструкции для развертывания и запуска приложения
  - .env file
     ```
